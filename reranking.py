@@ -61,7 +61,7 @@ def re_ranking(img_path, file_paths, matching, device, topk=10):
         topk_idxs = topk_idxs[:topk]
 
         inliers = conf_list[topk_idxs]
-        if inliers[0] > 150 or threshold < 0:
+        if inliers[0] > 180 or threshold < 0:
             break
         else:
             threshold = threshold - 0.1
