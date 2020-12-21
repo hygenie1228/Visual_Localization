@@ -14,10 +14,10 @@ import open3d
 import cv2
 from pyquaternion import Quaternion
 
-from retrieval import load_model, one_image_retrieval, visualize_retrieval_results
-from reranking import load_matching_model, re_ranking, visual_matching_result
-from projection import get_match_kpt, get_pcd_list, get_camera_timestammp, get_lidar_timestamp, get_pose_matrix, project_pcd_points, find_closest_points, visualize_projection_result
-from pose_estimation import get_intrinsic_matrix, estimate_pose_matrix
+from srcs.retrieval import load_model, one_image_retrieval, visualize_retrieval_results
+from srcs.reranking import load_matching_model, re_ranking, visual_matching_result
+from srcs.projection import get_match_kpt, get_pcd_list, get_camera_timestammp, get_lidar_timestamp, get_pose_matrix, project_pcd_points, find_closest_points, visualize_projection_result
+from srcs.pose_estimation import get_intrinsic_matrix, estimate_pose_matrix
 
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import pyplot as plt
@@ -73,8 +73,7 @@ if __name__ == '__main__':
     device = 'cuda' if args.iscuda else 'cpu'
     matching_net = load_matching_model(device)
     
-    #for test_idx in range(dataset.nimg):
-    for test_idx in range(1911, 1912):
+    for test_idx in range(dataset.nimg):
         print("idx : ", test_idx)
 
         # get test image
@@ -194,7 +193,7 @@ if __name__ == '__main__':
         
         if visualize:
             visualize_projection_result(image0, image1, mkpts0, mkpts1, new_mkpts0, new_mkpts1, pcd_2ds, new_pcd_3ds, result_path)
-        
+        '''
         file_path = "results/result.json"  
         with open(file_path, 'w') as outfile:
             json.dump(json_data, outfile)
@@ -202,3 +201,4 @@ if __name__ == '__main__':
         file_path = "results/log.json"
         with open(file_path, 'w') as outfile:
             json.dump(json_log, outfile)
+        '''
